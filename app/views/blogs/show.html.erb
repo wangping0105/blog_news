@@ -1,0 +1,46 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-app="cheKouBei" >
+  <h2 class="sub-header">博客列表</h2>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= link_to '返回列表', blogs_path, class: "btn btn-sm btn-primary"%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <%= @blog.title %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <%=raw @blog.content %>
+    </div>
+  </div>
+
+  <h3>评论区</h3>
+  <div class="table-responsive" ng-controller="home">
+    <table class="table table-striped">
+      <tbody>
+      <% @comments.each_with_index do |c, i|  %>
+          <tr>
+            <td width="100"><%= i+1 %>#<%= c.user.name %></td>
+            <td><%= c.content %></td>
+          </tr>
+      <%end %>
+      <%if@comments.size == 0 %>
+          <tr colspan="4"><td>暂无</td></tr>
+      <%end %>
+      </tbody>
+    </table>
+    <%= paginate @comments %>
+  </div>
+
+  <%= form_for(Comment.new, url: comment_blog_path(@blog), html:{class: "form-signin"}, method: "post") do |f|%>
+      <h3 class="form-signin-heading">发布评论</h3>
+      <label for="inputPassword" class="sr-only">内容</label>
+      <%=f.text_area :content ,class:"form-control minh-200", placeholder:"内容", required: true%>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">发布</button>
+  <%end %>
+</div>

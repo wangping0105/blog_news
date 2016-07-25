@@ -1,0 +1,36 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-app="cheKouBei" >
+  <h2 class="sub-header">博客列表</h2>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= link_to '发博客', new_blog_path, class: "btn btn-sm btn-primary"%>
+    </div>
+  </div>
+  <div class="table-responsive" ng-controller="home">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>标题</th>
+        <th>内容</th>
+        <th>时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%@blogs.each_with_index do |car, i|  %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%=link_to car.title, blog_path(car) %></td>
+            <td><%= car.content %></td>
+            <td><%= car.created_at.strftime("%F %T")%></td>
+          </tr>
+      <%end %>
+      <%if @blogs.size == 0 %>
+        <tr colspan="4"><td>暂无</td></tr>
+      <%end %>
+      </tbody>
+    </table>
+    <%= paginate @blogs %>
+  </div>
+</div>
+
+
