@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get 'blogs/index'
+  devise_for :users, controllers: {
+     sessions: 'users/sessions',
+     registrations: 'users/registrations'
+   }
 
-  get 'blogs/new'
-
-  get 'blogs/create'
-
-  root 'sessions#index'
+  root to: 'blogs#index'
 
   resources :sessions do
     collection do

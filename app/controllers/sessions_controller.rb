@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   layout 'sessions'
+
+  skip_before_action :authenticate_user!, except: [:destroy]
   def index
     @user = User.new
   end

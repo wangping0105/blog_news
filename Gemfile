@@ -33,6 +33,8 @@ gem 'kaminari'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'danmu'
+# auth 解决方案
+gem 'devise'
 
 group :development do
   gem 'pry-rails'
